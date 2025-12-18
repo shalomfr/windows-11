@@ -800,6 +800,59 @@
       font-size: 24px;
       margin-bottom: 30px;
     }
+
+    /* Browser Styles */
+    @keyframes spin {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+
+    .browser-tab {
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+
+    .browser-tab:hover {
+      background: #333 !important;
+    }
+
+    .quick-links {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 20px;
+      max-width: 500px;
+      margin: 30px auto;
+    }
+
+    .quick-link {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      padding: 15px;
+      border-radius: 12px;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+
+    .quick-link:hover {
+      background: rgba(0,0,0,0.05);
+    }
+
+    .quick-link-icon {
+      width: 48px;
+      height: 48px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
+    }
+
+    .quick-link span {
+      font-size: 12px;
+      color: #333;
+    }
   </style>
 </head>
 <body>
@@ -1042,7 +1095,7 @@
       </div>
     </div>
 
-    <div class="window" id="edgeWindow" style="top: 40px; left: 120px; width: 850px; height: 500px;">
+    <div class="window" id="edgeWindow" style="top: 40px; left: 120px; width: 900px; height: 550px;">
       <div class="window-header" onmousedown="startDrag(event, 'edgeWindow')">
         <div class="window-title"><span>🌐</span> Microsoft Edge</div>
         <div class="window-controls">
@@ -1052,14 +1105,33 @@
         </div>
       </div>
       <div class="window-body" style="padding: 0; display: flex; flex-direction: column;">
-        <div style="background: #2d2d2d; padding: 8px; display: flex; gap: 8px; align-items: center;">
-          <span>←</span><span>→</span><span>🔄</span>
-          <input type="text" value="https://www.bing.com" style="flex: 1; padding: 8px 12px; border-radius: 20px; border: none; background: #1e1e1e; color: white; font-size: 13px;">
+        <div class="browser-toolbar" style="background: #2d2d2d; padding: 8px 12px; display: flex; gap: 8px; align-items: center;">
+          <div class="nav-btn" onclick="browserBack()" title="Back">←</div>
+          <div class="nav-btn" onclick="browserForward()" title="Forward">→</div>
+          <div class="nav-btn" onclick="browserRefresh()" title="Refresh">🔄</div>
+          <div class="nav-btn" onclick="browserHome()" title="Home">🏠</div>
+          <input type="text" id="browserUrl" value="https://www.google.com/webhp?igu=1" 
+            style="flex: 1; padding: 8px 12px; border-radius: 20px; border: none; background: #1e1e1e; color: white; font-size: 13px;"
+            onkeypress="if(event.key==='Enter') browserNavigate()">
+          <div class="nav-btn" onclick="browserNavigate()" title="Go">➜</div>
         </div>
-        <div style="flex: 1; background: #f3f3f3; display: flex; flex-direction: column; align-items: center; justify-content: center; color: #333;">
-          <div style="font-size: 48px;">🌐</div>
-          <div style="font-size: 24px; font-weight: 300;">Microsoft Bing</div>
-          <input type="text" placeholder="חפש בווב..." style="margin-top: 20px; width: 450px; padding: 12px 18px; border-radius: 25px; border: 1px solid #ddd; font-size: 14px;">
+        <div class="browser-tabs" style="background: #252525; padding: 4px 8px; display: flex; gap: 2px; align-items: center;">
+          <div class="browser-tab active" style="background: #1e1e1e; padding: 6px 12px; border-radius: 8px 8px 0 0; font-size: 12px; color: #fff; display: flex; align-items: center; gap: 6px; max-width: 200px;">
+            <span id="tabIcon">🌐</span>
+            <span id="tabTitle" style="overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">New Tab</span>
+          </div>
+          <div style="padding: 4px 10px; color: #888; cursor: pointer; font-size: 16px;">+</div>
+        </div>
+        <div class="browser-content" style="flex: 1; position: relative; background: #fff;">
+          <iframe id="browserFrame" 
+            src="https://www.google.com/webhp?igu=1" 
+            style="width: 100%; height: 100%; border: none;"
+            sandbox="allow-same-origin allow-scripts allow-popups allow-forms"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture">
+          </iframe>
+          <div id="browserLoading" style="display: none; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); color: #333;">
+            <div style="font-size: 32px; animation: spin 1s linear infinite;">⏳</div>
+          </div>
         </div>
       </div>
     </div>
@@ -2000,6 +2072,120 @@
         renderExplorer(currentPath);
       }
     };
+
+    // ====== BROWSER FUNCTIONS ======
+    let browserHistory = ['https://www.google.com/webhp?igu=1'];
+    let browserHistoryIndex = 0;
+
+    function browserNavigate(url) {
+      const urlInput = document.getElementById('browserUrl');
+      const frame = document.getElementById('browserFrame');
+      const loading = document.getElementById('browserLoading');
+      
+      let targetUrl = url || urlInput.value.trim();
+      
+      // Add https:// if missing
+      if (targetUrl && !targetUrl.startsWith('http://') && !targetUrl.startsWith('https://')) {
+        // Check if it's a search query or a URL
+        if (targetUrl.includes('.') && !targetUrl.includes(' ')) {
+          targetUrl = 'https://' + targetUrl;
+        } else {
+          // Use Google search
+          targetUrl = 'https://www.google.com/search?igu=1&q=' + encodeURIComponent(targetUrl);
+        }
+      }
+      
+      urlInput.value = targetUrl;
+      
+      // Show loading
+      loading.style.display = 'block';
+      
+      // Update history
+      if (targetUrl !== browserHistory[browserHistoryIndex]) {
+        browserHistory = browserHistory.slice(0, browserHistoryIndex + 1);
+        browserHistory.push(targetUrl);
+        browserHistoryIndex = browserHistory.length - 1;
+      }
+      
+      // Navigate
+      frame.src = targetUrl;
+      
+      // Update tab title
+      updateTabTitle(targetUrl);
+      
+      // Hide loading after a delay
+      setTimeout(() => {
+        loading.style.display = 'none';
+      }, 1500);
+    }
+
+    function browserBack() {
+      if (browserHistoryIndex > 0) {
+        browserHistoryIndex--;
+        const url = browserHistory[browserHistoryIndex];
+        document.getElementById('browserUrl').value = url;
+        document.getElementById('browserFrame').src = url;
+        updateTabTitle(url);
+      }
+    }
+
+    function browserForward() {
+      if (browserHistoryIndex < browserHistory.length - 1) {
+        browserHistoryIndex++;
+        const url = browserHistory[browserHistoryIndex];
+        document.getElementById('browserUrl').value = url;
+        document.getElementById('browserFrame').src = url;
+        updateTabTitle(url);
+      }
+    }
+
+    function browserRefresh() {
+      const frame = document.getElementById('browserFrame');
+      const loading = document.getElementById('browserLoading');
+      loading.style.display = 'block';
+      frame.src = frame.src;
+      setTimeout(() => {
+        loading.style.display = 'none';
+      }, 1500);
+    }
+
+    function browserHome() {
+      const homeUrl = 'https://www.google.com/webhp?igu=1';
+      document.getElementById('browserUrl').value = homeUrl;
+      browserNavigate(homeUrl);
+    }
+
+    function updateTabTitle(url) {
+      const tabTitle = document.getElementById('tabTitle');
+      const tabIcon = document.getElementById('tabIcon');
+      
+      try {
+        const hostname = new URL(url).hostname.replace('www.', '');
+        tabTitle.textContent = hostname || 'New Tab';
+        
+        // Set icon based on site
+        if (url.includes('google')) {
+          tabIcon.textContent = '🔍';
+        } else if (url.includes('youtube')) {
+          tabIcon.textContent = '▶️';
+        } else if (url.includes('github')) {
+          tabIcon.textContent = '🐙';
+        } else if (url.includes('wikipedia')) {
+          tabIcon.textContent = '📚';
+        } else {
+          tabIcon.textContent = '🌐';
+        }
+      } catch (e) {
+        tabTitle.textContent = 'New Tab';
+        tabIcon.textContent = '🌐';
+      }
+    }
+
+    // Quick site navigation
+    function goToSite(url) {
+      document.getElementById('browserUrl').value = url;
+      browserNavigate(url);
+    }
 
     // Start Boot
     setTimeout(typeBios, 500);
