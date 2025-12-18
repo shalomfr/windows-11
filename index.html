@@ -853,6 +853,202 @@
       font-size: 12px;
       color: #333;
     }
+
+    /* Calendar Popup */
+    .calendar-popup {
+      position: fixed;
+      bottom: 60px;
+      right: 10px;
+      width: 320px;
+      background: rgba(32, 32, 32, 0.95);
+      backdrop-filter: blur(30px);
+      border-radius: 8px;
+      padding: 20px;
+      display: none;
+      z-index: 150;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.4);
+      color: white;
+    }
+    .calendar-popup.open { display: block; }
+    .calendar-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; }
+    .calendar-nav { cursor: pointer; padding: 5px 10px; border-radius: 4px; }
+    .calendar-nav:hover { background: rgba(255,255,255,0.1); }
+    .calendar-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 2px; text-align: center; }
+    .calendar-day { padding: 8px; border-radius: 50%; cursor: pointer; font-size: 13px; }
+    .calendar-day:hover { background: rgba(255,255,255,0.1); }
+    .calendar-day.today { background: #0078d4; }
+    .calendar-day.header { font-weight: bold; color: #888; font-size: 11px; }
+    .calendar-day.other-month { color: #666; }
+
+    /* Quick Settings Panel */
+    .quick-settings {
+      position: fixed;
+      bottom: 60px;
+      right: 10px;
+      width: 360px;
+      background: rgba(32, 32, 32, 0.95);
+      backdrop-filter: blur(30px);
+      border-radius: 8px;
+      padding: 20px;
+      display: none;
+      z-index: 150;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.4);
+      color: white;
+    }
+    .quick-settings.open { display: block; }
+    .qs-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-bottom: 20px; }
+    .qs-btn { padding: 15px 10px; border-radius: 8px; background: #3d3d3d; cursor: pointer; text-align: center; transition: all 0.2s; }
+    .qs-btn:hover { background: #4d4d4d; }
+    .qs-btn.active { background: #0078d4; }
+    .qs-btn span { display: block; font-size: 20px; margin-bottom: 5px; }
+    .qs-btn small { font-size: 11px; color: #aaa; }
+    .qs-slider { margin: 15px 0; }
+    .qs-slider label { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; font-size: 13px; }
+    .qs-slider input[type="range"] { flex: 1; accent-color: #0078d4; }
+
+    /* Taskbar App Indicators */
+    .taskbar-btn.running::after {
+      content: '';
+      position: absolute;
+      bottom: 2px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 6px;
+      height: 3px;
+      background: #0078d4;
+      border-radius: 2px;
+    }
+    .taskbar-btn { position: relative; }
+
+    /* Window Resizable */
+    .window { min-width: 300px; min-height: 200px; }
+    .window.maximized { 
+      top: 0 !important; 
+      left: 0 !important; 
+      width: 100% !important; 
+      height: calc(100vh - 48px) !important; 
+      border-radius: 0; 
+    }
+    .window.minimized { display: none !important; }
+    .resize-handle {
+      position: absolute;
+      background: transparent;
+    }
+    .resize-handle.se { right: 0; bottom: 0; width: 15px; height: 15px; cursor: se-resize; }
+    .resize-handle.sw { left: 0; bottom: 0; width: 15px; height: 15px; cursor: sw-resize; }
+    .resize-handle.ne { right: 0; top: 0; width: 15px; height: 15px; cursor: ne-resize; }
+    .resize-handle.nw { left: 0; top: 0; width: 15px; height: 15px; cursor: nw-resize; }
+    .resize-handle.n { top: 0; left: 15px; right: 15px; height: 5px; cursor: n-resize; }
+    .resize-handle.s { bottom: 0; left: 15px; right: 15px; height: 5px; cursor: s-resize; }
+    .resize-handle.e { right: 0; top: 15px; bottom: 15px; width: 5px; cursor: e-resize; }
+    .resize-handle.w { left: 0; top: 15px; bottom: 15px; width: 5px; cursor: w-resize; }
+
+    /* Calculator */
+    .calc-display { background: #1a1a1a; padding: 20px; text-align: right; font-size: 32px; margin-bottom: 10px; border-radius: 4px; }
+    .calc-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 5px; }
+    .calc-btn { padding: 18px; font-size: 18px; border: none; border-radius: 4px; cursor: pointer; transition: background 0.2s; }
+    .calc-btn.num { background: #3d3d3d; color: white; }
+    .calc-btn.num:hover { background: #4d4d4d; }
+    .calc-btn.op { background: #2d2d2d; color: white; }
+    .calc-btn.op:hover { background: #3d3d3d; }
+    .calc-btn.eq { background: #0078d4; color: white; }
+    .calc-btn.eq:hover { background: #1084d8; }
+
+    /* Terminal */
+    .terminal-output { font-family: 'Consolas', monospace; font-size: 14px; white-space: pre-wrap; margin-bottom: 10px; }
+    .terminal-input { display: flex; align-items: center; }
+    .terminal-prompt { color: #0a0; margin-right: 8px; }
+    .terminal-input input { flex: 1; background: transparent; border: none; color: white; font-family: 'Consolas', monospace; font-size: 14px; outline: none; }
+
+    /* Task Manager */
+    .task-list { margin-top: 10px; }
+    .task-item { display: flex; justify-content: space-between; padding: 10px; background: #2d2d2d; margin-bottom: 5px; border-radius: 4px; align-items: center; }
+    .task-item:hover { background: #3d3d3d; }
+    .task-info { display: flex; align-items: center; gap: 10px; }
+    .task-end { padding: 5px 10px; background: #e81123; border: none; color: white; border-radius: 4px; cursor: pointer; font-size: 12px; }
+
+    /* Widgets Panel */
+    .widgets-panel {
+      position: fixed;
+      top: 0;
+      left: -400px;
+      width: 400px;
+      height: calc(100vh - 48px);
+      background: rgba(32, 32, 32, 0.95);
+      backdrop-filter: blur(30px);
+      transition: left 0.3s ease;
+      z-index: 90;
+      padding: 20px;
+      overflow-y: auto;
+      color: white;
+    }
+    .widgets-panel.open { left: 0; }
+    .widget-card { background: #2d2d2d; border-radius: 12px; padding: 20px; margin-bottom: 15px; }
+    .widget-title { font-size: 14px; font-weight: 600; margin-bottom: 15px; display: flex; align-items: center; gap: 8px; }
+    .weather-main { display: flex; align-items: center; gap: 15px; margin-bottom: 15px; }
+    .weather-temp { font-size: 48px; font-weight: 300; }
+    .weather-icon { font-size: 48px; }
+    .weather-details { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; font-size: 12px; color: #aaa; }
+
+    /* Paint App */
+    .paint-toolbar { display: flex; gap: 10px; padding: 10px; background: #2d2d2d; align-items: center; flex-wrap: wrap; }
+    .paint-colors { display: flex; gap: 5px; }
+    .paint-color { width: 24px; height: 24px; border-radius: 50%; cursor: pointer; border: 2px solid transparent; }
+    .paint-color.active { border-color: white; }
+    .paint-canvas { background: white; cursor: crosshair; }
+    .paint-sizes { display: flex; gap: 5px; align-items: center; }
+    .paint-size { width: 30px; height: 30px; border-radius: 4px; background: #3d3d3d; display: flex; align-items: center; justify-content: center; cursor: pointer; color: white; font-size: 12px; }
+    .paint-size.active { background: #0078d4; }
+
+    /* Alt+Tab Switcher */
+    .alt-tab-switcher {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: rgba(32, 32, 32, 0.95);
+      backdrop-filter: blur(30px);
+      border-radius: 12px;
+      padding: 20px;
+      display: none;
+      z-index: 3000;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.4);
+    }
+    .alt-tab-switcher.open { display: flex; gap: 15px; }
+    .alt-tab-item { width: 150px; padding: 15px; border-radius: 8px; text-align: center; cursor: pointer; color: white; }
+    .alt-tab-item.selected { background: rgba(255,255,255,0.2); }
+    .alt-tab-item span { font-size: 32px; display: block; margin-bottom: 8px; }
+    .alt-tab-item small { font-size: 11px; }
+
+    /* BSOD */
+    .bsod-screen {
+      position: fixed;
+      inset: 0;
+      background: #0078d4;
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      z-index: 5000;
+      color: white;
+      text-align: center;
+      padding: 50px;
+    }
+    .bsod-screen.show { display: flex; }
+    .bsod-sad { font-size: 120px; margin-bottom: 30px; }
+    .bsod-title { font-size: 28px; margin-bottom: 20px; }
+    .bsod-text { font-size: 14px; max-width: 600px; line-height: 1.6; color: rgba(255,255,255,0.8); }
+    .bsod-qr { margin-top: 30px; font-size: 60px; }
+
+    /* Lock Screen Overlay */
+    .lock-overlay {
+      position: fixed;
+      inset: 0;
+      background: url('https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1920') center/cover;
+      display: none;
+      z-index: 2500;
+    }
+    .lock-overlay.show { display: flex; flex-direction: column; align-items: center; justify-content: center; }
   </style>
 </head>
 <body>
@@ -960,20 +1156,21 @@
 
     <!-- Taskbar -->
     <div class="taskbar">
+      <div class="taskbar-btn" onclick="toggleWidgets()" style="position: absolute; left: 10px;">📰</div>
       <div class="taskbar-center">
         <div class="taskbar-btn start-btn" onclick="toggleStartMenu()">🪟</div>
-        <div class="taskbar-btn" onclick="openWindow('edge')">🌐</div>
-        <div class="taskbar-btn" onclick="openWindow('explorer')">📁</div>
-        <div class="taskbar-btn">💬</div>
-        <div class="taskbar-btn">🛒</div>
+        <div class="taskbar-btn" id="taskbar-edge" onclick="openWindow('edge')">🌐</div>
+        <div class="taskbar-btn" id="taskbar-explorer" onclick="openWindow('explorer')">📁</div>
+        <div class="taskbar-btn" id="taskbar-terminal" onclick="openWindow('terminal')">⬛</div>
+        <div class="taskbar-btn" id="taskbar-notepad" onclick="openWindow('notepad')">📝</div>
       </div>
       <div class="taskbar-right">
-        <div class="system-tray">
-          <span>🔊</span>
+        <div class="system-tray" onclick="toggleQuickSettings()">
+          <span id="volumeIcon">🔊</span>
           <span>📶</span>
           <span>🔋</span>
         </div>
-        <div class="clock" id="clock">
+        <div class="clock" id="clock" onclick="toggleCalendar()">
           <div id="time">12:00</div>
           <div id="date">01/01/2024</div>
         </div>
@@ -983,21 +1180,21 @@
     <!-- Start Menu -->
     <div class="start-menu" id="startMenu">
       <div class="start-content">
-        <input type="text" class="search-box" placeholder="🔍 חיפוש אפליקציות, הגדרות ומסמכים">
+        <input type="text" class="search-box" id="startSearch" placeholder="🔍 חיפוש אפליקציות, הגדרות ומסמכים" oninput="filterApps(this.value)">
         <div class="section-title">Pinned</div>
-        <div class="pinned-apps">
-          <div class="app-item" onclick="openWindow('edge')"><div class="icon-img">🌐</div><span>Edge</span></div>
-          <div class="app-item" onclick="openWindow('explorer')"><div class="icon-img">📁</div><span>Explorer</span></div>
-          <div class="app-item"><div class="icon-img">📧</div><span>Mail</span></div>
-          <div class="app-item"><div class="icon-img">📅</div><span>Calendar</span></div>
-          <div class="app-item" onclick="openWindow('notepad')"><div class="icon-img">📝</div><span>Notepad</span></div>
-          <div class="app-item" onclick="openWindow('settings')"><div class="icon-img">⚙️</div><span>Settings</span></div>
-          <div class="app-item"><div class="icon-img">🎵</div><span>Music</span></div>
-          <div class="app-item"><div class="icon-img">📷</div><span>Photos</span></div>
-          <div class="app-item"><div class="icon-img">🎮</div><span>Xbox</span></div>
-          <div class="app-item"><div class="icon-img">💼</div><span>Word</span></div>
-          <div class="app-item"><div class="icon-img">📊</div><span>Excel</span></div>
-          <div class="app-item"><div class="icon-img">📑</div><span>PowerPoint</span></div>
+        <div class="pinned-apps" id="pinnedApps">
+          <div class="app-item" data-name="edge" onclick="openWindow('edge')"><div class="icon-img">🌐</div><span>Edge</span></div>
+          <div class="app-item" data-name="explorer" onclick="openWindow('explorer')"><div class="icon-img">📁</div><span>Explorer</span></div>
+          <div class="app-item" data-name="terminal" onclick="openWindow('terminal')"><div class="icon-img">⬛</div><span>Terminal</span></div>
+          <div class="app-item" data-name="calculator" onclick="openWindow('calculator')"><div class="icon-img">🧮</div><span>Calculator</span></div>
+          <div class="app-item" data-name="notepad" onclick="openWindow('notepad')"><div class="icon-img">📝</div><span>Notepad</span></div>
+          <div class="app-item" data-name="settings" onclick="openWindow('settings')"><div class="icon-img">⚙️</div><span>Settings</span></div>
+          <div class="app-item" data-name="paint" onclick="openWindow('paint')"><div class="icon-img">🎨</div><span>Paint</span></div>
+          <div class="app-item" data-name="taskmanager" onclick="openWindow('taskmanager')"><div class="icon-img">📊</div><span>Task Manager</span></div>
+          <div class="app-item" data-name="xbox" onclick="triggerBSOD()"><div class="icon-img">🎮</div><span>Xbox</span></div>
+          <div class="app-item" data-name="word"><div class="icon-img">💼</div><span>Word</span></div>
+          <div class="app-item" data-name="excel"><div class="icon-img">📈</div><span>Excel</span></div>
+          <div class="app-item" data-name="powerpoint"><div class="icon-img">📑</div><span>PowerPoint</span></div>
         </div>
         <div class="section-title">Recommended</div>
         <div class="recommended">
@@ -1006,7 +1203,7 @@
         </div>
       </div>
       <div class="user-section">
-        <div class="user-profile">
+        <div class="user-profile" onclick="lockScreen()">
           <div class="user-avatar">👤</div>
           <span style="font-size: 13px;">שלום</span>
         </div>
@@ -1016,11 +1213,11 @@
 
     <!-- Windows -->
     <div class="window" id="explorerWindow" style="top: 50px; left: 100px;">
-      <div class="window-header" onmousedown="startDrag(event, 'explorerWindow')">
+      <div class="window-header" onmousedown="startDrag(event, 'explorerWindow')" ondblclick="maximizeWindow('explorer')">
         <div class="window-title"><span>📁</span> File Explorer</div>
         <div class="window-controls">
-          <div class="win-btn">─</div>
-          <div class="win-btn">☐</div>
+          <div class="win-btn" onclick="minimizeWindow('explorer')">─</div>
+          <div class="win-btn" onclick="maximizeWindow('explorer')">☐</div>
           <div class="win-btn close" onclick="closeWindow('explorer')">✕</div>
         </div>
       </div>
@@ -1052,11 +1249,11 @@
     </div>
 
     <div class="window" id="notepadWindow" style="top: 80px; left: 150px; width: 600px; height: 400px;">
-      <div class="window-header" onmousedown="startDrag(event, 'notepadWindow')">
+      <div class="window-header" onmousedown="startDrag(event, 'notepadWindow')" ondblclick="maximizeWindow('notepad')">
         <div class="window-title"><span>📝</span> Notepad</div>
         <div class="window-controls">
-          <div class="win-btn">─</div>
-          <div class="win-btn">☐</div>
+          <div class="win-btn" onclick="minimizeWindow('notepad')">─</div>
+          <div class="win-btn" onclick="maximizeWindow('notepad')">☐</div>
           <div class="win-btn close" onclick="closeWindow('notepad')">✕</div>
         </div>
       </div>
@@ -1066,11 +1263,11 @@
     </div>
 
     <div class="window" id="settingsWindow" style="top: 60px; left: 200px; width: 850px; height: 500px;">
-      <div class="window-header" onmousedown="startDrag(event, 'settingsWindow')">
+      <div class="window-header" onmousedown="startDrag(event, 'settingsWindow')" ondblclick="maximizeWindow('settings')">
         <div class="window-title"><span>⚙️</span> Settings</div>
         <div class="window-controls">
-          <div class="win-btn">─</div>
-          <div class="win-btn">☐</div>
+          <div class="win-btn" onclick="minimizeWindow('settings')">─</div>
+          <div class="win-btn" onclick="maximizeWindow('settings')">☐</div>
           <div class="win-btn close" onclick="closeWindow('settings')">✕</div>
         </div>
       </div>
@@ -1096,11 +1293,11 @@
     </div>
 
     <div class="window" id="edgeWindow" style="top: 40px; left: 120px; width: 900px; height: 550px;">
-      <div class="window-header" onmousedown="startDrag(event, 'edgeWindow')">
+      <div class="window-header" onmousedown="startDrag(event, 'edgeWindow')" ondblclick="maximizeWindow('edge')">
         <div class="window-title"><span>🌐</span> Microsoft Edge</div>
         <div class="window-controls">
-          <div class="win-btn">─</div>
-          <div class="win-btn">☐</div>
+          <div class="win-btn" onclick="minimizeWindow('edge')">─</div>
+          <div class="win-btn" onclick="maximizeWindow('edge')">☐</div>
           <div class="win-btn close" onclick="closeWindow('edge')">✕</div>
         </div>
       </div>
@@ -1138,15 +1335,218 @@
 
     <!-- Context Menu -->
     <div class="context-menu" id="contextMenu">
-      <div class="context-item">👁️ View</div>
+      <div class="context-item" onclick="document.getElementById('desktopContainer').style.background = 'url(https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1920) center/cover'">👁️ View</div>
       <div class="context-item">📋 Sort by</div>
-      <div class="context-item">🔄 Refresh</div>
+      <div class="context-item" onclick="location.reload()">🔄 Refresh</div>
       <div class="context-divider"></div>
-      <div class="context-item">📁 New folder</div>
-      <div class="context-item">📄 New file</div>
+      <div class="context-item" onclick="createNewFolder()">📁 New folder</div>
+      <div class="context-item" onclick="createNewFile()">📄 New file</div>
       <div class="context-divider"></div>
-      <div class="context-item">🖼️ Personalize</div>
-      <div class="context-item">⚙️ Display settings</div>
+      <div class="context-item" onclick="openWindow('settings')">🖼️ Personalize</div>
+      <div class="context-item" onclick="openWindow('settings')">⚙️ Display settings</div>
+    </div>
+
+    <!-- Calendar Popup -->
+    <div class="calendar-popup" id="calendarPopup">
+      <div class="calendar-header">
+        <div class="calendar-nav" onclick="changeMonth(-1)">◀</div>
+        <div id="calendarMonth">December 2024</div>
+        <div class="calendar-nav" onclick="changeMonth(1)">▶</div>
+      </div>
+      <div class="calendar-grid" id="calendarGrid"></div>
+    </div>
+
+    <!-- Quick Settings -->
+    <div class="quick-settings" id="quickSettings">
+      <div class="qs-grid">
+        <div class="qs-btn active" onclick="this.classList.toggle('active')"><span>📶</span><small>Wi-Fi</small></div>
+        <div class="qs-btn" onclick="this.classList.toggle('active')"><span>📱</span><small>Bluetooth</small></div>
+        <div class="qs-btn" onclick="this.classList.toggle('active')"><span>✈️</span><small>Airplane</small></div>
+        <div class="qs-btn" onclick="this.classList.toggle('active')"><span>🔋</span><small>Battery</small></div>
+        <div class="qs-btn active" onclick="this.classList.toggle('active')"><span>🌙</span><small>Night</small></div>
+        <div class="qs-btn" onclick="this.classList.toggle('active')"><span>🔒</span><small>VPN</small></div>
+      </div>
+      <div class="qs-slider">
+        <label>🔆 <input type="range" min="0" max="100" value="80" id="brightnessSlider"> <span id="brightnessVal">80%</span></label>
+      </div>
+      <div class="qs-slider">
+        <label>🔊 <input type="range" min="0" max="100" value="50" id="volumeSlider" oninput="updateVolume(this.value)"> <span id="volumeVal">50%</span></label>
+      </div>
+    </div>
+
+    <!-- Widgets Panel -->
+    <div class="widgets-panel" id="widgetsPanel">
+      <div class="widget-card">
+        <div class="widget-title">🌤️ Weather</div>
+        <div class="weather-main">
+          <div class="weather-icon">☀️</div>
+          <div class="weather-temp">22°</div>
+          <div style="color: #aaa;">Tel Aviv<br>Sunny</div>
+        </div>
+        <div class="weather-details">
+          <div>💧 45%<br>Humidity</div>
+          <div>💨 12 km/h<br>Wind</div>
+          <div>🌡️ 18°-25°<br>Hi/Lo</div>
+        </div>
+      </div>
+      <div class="widget-card">
+        <div class="widget-title">📰 News</div>
+        <div style="font-size: 13px; line-height: 1.6;">
+          <div style="padding: 10px 0; border-bottom: 1px solid #444;">Tech Giants Report Record Earnings</div>
+          <div style="padding: 10px 0; border-bottom: 1px solid #444;">New AI Breakthrough Announced</div>
+          <div style="padding: 10px 0;">Space Mission Successfully Launches</div>
+        </div>
+      </div>
+      <div class="widget-card">
+        <div class="widget-title">📈 Stocks</div>
+        <div style="font-size: 13px;">
+          <div style="display: flex; justify-content: space-between; padding: 8px 0;"><span>MSFT</span><span style="color: #4caf50;">▲ 2.3%</span></div>
+          <div style="display: flex; justify-content: space-between; padding: 8px 0;"><span>AAPL</span><span style="color: #4caf50;">▲ 1.1%</span></div>
+          <div style="display: flex; justify-content: space-between; padding: 8px 0;"><span>GOOGL</span><span style="color: #f44336;">▼ 0.5%</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Calculator Window -->
+    <div class="window" id="calculatorWindow" style="top: 100px; left: 300px; width: 320px; height: 450px;">
+      <div class="window-header" onmousedown="startDrag(event, 'calculatorWindow')">
+        <div class="window-title"><span>🧮</span> Calculator</div>
+        <div class="window-controls">
+          <div class="win-btn" onclick="minimizeWindow('calculator')">─</div>
+          <div class="win-btn" onclick="maximizeWindow('calculator')">☐</div>
+          <div class="win-btn close" onclick="closeWindow('calculator')">✕</div>
+        </div>
+      </div>
+      <div class="window-body" style="padding: 15px;">
+        <div class="calc-display" id="calcDisplay">0</div>
+        <div class="calc-grid">
+          <div class="calc-btn op" onclick="clearCalc()">C</div>
+          <div class="calc-btn op" onclick="calcInput('±')">±</div>
+          <div class="calc-btn op" onclick="calcInput('%')">%</div>
+          <div class="calc-btn op" onclick="calcInput('/')">÷</div>
+          <div class="calc-btn num" onclick="calcInput('7')">7</div>
+          <div class="calc-btn num" onclick="calcInput('8')">8</div>
+          <div class="calc-btn num" onclick="calcInput('9')">9</div>
+          <div class="calc-btn op" onclick="calcInput('*')">×</div>
+          <div class="calc-btn num" onclick="calcInput('4')">4</div>
+          <div class="calc-btn num" onclick="calcInput('5')">5</div>
+          <div class="calc-btn num" onclick="calcInput('6')">6</div>
+          <div class="calc-btn op" onclick="calcInput('-')">−</div>
+          <div class="calc-btn num" onclick="calcInput('1')">1</div>
+          <div class="calc-btn num" onclick="calcInput('2')">2</div>
+          <div class="calc-btn num" onclick="calcInput('3')">3</div>
+          <div class="calc-btn op" onclick="calcInput('+')">+</div>
+          <div class="calc-btn num" onclick="calcInput('0')" style="grid-column: span 2;">0</div>
+          <div class="calc-btn num" onclick="calcInput('.')">.</div>
+          <div class="calc-btn eq" onclick="calcResult()">=</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Terminal Window -->
+    <div class="window" id="terminalWindow" style="top: 80px; left: 200px; width: 700px; height: 400px;">
+      <div class="window-header" onmousedown="startDrag(event, 'terminalWindow')">
+        <div class="window-title"><span>⬛</span> Windows Terminal</div>
+        <div class="window-controls">
+          <div class="win-btn" onclick="minimizeWindow('terminal')">─</div>
+          <div class="win-btn" onclick="maximizeWindow('terminal')">☐</div>
+          <div class="win-btn close" onclick="closeWindow('terminal')">✕</div>
+        </div>
+      </div>
+      <div class="window-body" style="background: #0c0c0c; padding: 15px; font-family: Consolas, monospace;">
+        <div class="terminal-output" id="terminalOutput">Microsoft Windows [Version 10.0.22631.2861]
+(c) Microsoft Corporation. All rights reserved.
+
+</div>
+        <div class="terminal-input">
+          <span class="terminal-prompt">C:\Users\Shalom></span>
+          <input type="text" id="terminalInput" onkeypress="if(event.key==='Enter') executeCommand()">
+        </div>
+      </div>
+    </div>
+
+    <!-- Task Manager Window -->
+    <div class="window" id="taskmanagerWindow" style="top: 70px; left: 180px; width: 600px; height: 450px;">
+      <div class="window-header" onmousedown="startDrag(event, 'taskmanagerWindow')">
+        <div class="window-title"><span>📊</span> Task Manager</div>
+        <div class="window-controls">
+          <div class="win-btn" onclick="minimizeWindow('taskmanager')">─</div>
+          <div class="win-btn" onclick="maximizeWindow('taskmanager')">☐</div>
+          <div class="win-btn close" onclick="closeWindow('taskmanager')">✕</div>
+        </div>
+      </div>
+      <div class="window-body" style="padding: 15px;">
+        <div style="display: flex; justify-content: space-between; margin-bottom: 15px;">
+          <div style="background: #2d2d2d; padding: 15px; border-radius: 8px; text-align: center; flex: 1; margin-right: 10px;">
+            <div style="font-size: 24px; color: #0078d4;" id="cpuUsage">23%</div>
+            <div style="font-size: 12px; color: #888;">CPU</div>
+          </div>
+          <div style="background: #2d2d2d; padding: 15px; border-radius: 8px; text-align: center; flex: 1; margin-right: 10px;">
+            <div style="font-size: 24px; color: #9c27b0;" id="memUsage">67%</div>
+            <div style="font-size: 12px; color: #888;">Memory</div>
+          </div>
+          <div style="background: #2d2d2d; padding: 15px; border-radius: 8px; text-align: center; flex: 1;">
+            <div style="font-size: 24px; color: #4caf50;" id="diskUsage">12%</div>
+            <div style="font-size: 12px; color: #888;">Disk</div>
+          </div>
+        </div>
+        <div style="font-size: 14px; font-weight: 600; margin-bottom: 10px;">Processes</div>
+        <div class="task-list" id="taskList"></div>
+      </div>
+    </div>
+
+    <!-- Paint Window -->
+    <div class="window" id="paintWindow" style="top: 50px; left: 150px; width: 800px; height: 550px;">
+      <div class="window-header" onmousedown="startDrag(event, 'paintWindow')">
+        <div class="window-title"><span>🎨</span> Paint</div>
+        <div class="window-controls">
+          <div class="win-btn" onclick="minimizeWindow('paint')">─</div>
+          <div class="win-btn" onclick="maximizeWindow('paint')">☐</div>
+          <div class="win-btn close" onclick="closeWindow('paint')">✕</div>
+        </div>
+      </div>
+      <div class="window-body" style="padding: 0; display: flex; flex-direction: column;">
+        <div class="paint-toolbar">
+          <div class="paint-colors">
+            <div class="paint-color active" style="background: #000" onclick="setPaintColor('#000', this)"></div>
+            <div class="paint-color" style="background: #fff" onclick="setPaintColor('#fff', this)"></div>
+            <div class="paint-color" style="background: #0078d4" onclick="setPaintColor('#0078d4', this)"></div>
+            <div class="paint-color" style="background: #4caf50" onclick="setPaintColor('#4caf50', this)"></div>
+            <div class="paint-color" style="background: #ff9800" onclick="setPaintColor('#ff9800', this)"></div>
+            <div class="paint-color" style="background: #9c27b0" onclick="setPaintColor('#9c27b0', this)"></div>
+            <div class="paint-color" style="background: #ffeb3b" onclick="setPaintColor('#ffeb3b', this)"></div>
+          </div>
+          <div class="paint-sizes">
+            <div class="paint-size active" onclick="setPaintSize(2, this)">S</div>
+            <div class="paint-size" onclick="setPaintSize(5, this)">M</div>
+            <div class="paint-size" onclick="setPaintSize(10, this)">L</div>
+          </div>
+          <div class="nav-btn" onclick="clearCanvas()" style="margin-left: auto;">🗑️</div>
+        </div>
+        <canvas id="paintCanvas" class="paint-canvas" style="flex: 1;"></canvas>
+      </div>
+    </div>
+
+    <!-- Alt+Tab Switcher -->
+    <div class="alt-tab-switcher" id="altTabSwitcher"></div>
+
+    <!-- BSOD Screen -->
+    <div class="bsod-screen" id="bsodScreen">
+      <div class="bsod-sad">:(</div>
+      <div class="bsod-title">Your PC ran into a problem and needs to restart.</div>
+      <div class="bsod-text">We're just collecting some error info, and then we'll restart for you.<br><br>0% complete</div>
+      <div class="bsod-qr">▣</div>
+      <div class="bsod-text" style="margin-top: 20px;">For more information about this issue and possible fixes, visit<br>https://www.windows.com/stopcode</div>
+      <div class="bsod-text" style="margin-top: 15px;">Stop code: CRITICAL_PROCESS_DIED</div>
+    </div>
+
+    <!-- Lock Overlay -->
+    <div class="lock-overlay" id="lockOverlay">
+      <div class="lock-time" style="position: relative; bottom: auto; left: auto; text-align: center;">
+        <div class="time" id="lockOverlayTime">12:00</div>
+        <div class="date" id="lockOverlayDate">יום חמישי, 18 בדצמבר</div>
+      </div>
+      <div class="lock-hint" style="margin-top: 50px;">לחץ או הקש להמשך</div>
     </div>
   </div>
 
@@ -2186,6 +2586,471 @@
       document.getElementById('browserUrl').value = url;
       browserNavigate(url);
     }
+
+    // ====== CALENDAR ======
+    let currentCalendarDate = new Date();
+    
+    function toggleCalendar() {
+      document.getElementById('quickSettings').classList.remove('open');
+      document.getElementById('calendarPopup').classList.toggle('open');
+      renderCalendar();
+    }
+
+    function renderCalendar() {
+      const grid = document.getElementById('calendarGrid');
+      const monthLabel = document.getElementById('calendarMonth');
+      const year = currentCalendarDate.getFullYear();
+      const month = currentCalendarDate.getMonth();
+      
+      monthLabel.textContent = new Date(year, month).toLocaleDateString('he-IL', { month: 'long', year: 'numeric' });
+      
+      grid.innerHTML = '';
+      const days = ['א', 'ב', 'ג', 'ד', 'ה', 'ו', 'ש'];
+      days.forEach(d => grid.innerHTML += `<div class="calendar-day header">${d}</div>`);
+      
+      const firstDay = new Date(year, month, 1).getDay();
+      const daysInMonth = new Date(year, month + 1, 0).getDate();
+      const today = new Date();
+      
+      for (let i = 0; i < firstDay; i++) {
+        const prevDays = new Date(year, month, 0).getDate();
+        grid.innerHTML += `<div class="calendar-day other-month">${prevDays - firstDay + i + 1}</div>`;
+      }
+      
+      for (let i = 1; i <= daysInMonth; i++) {
+        const isToday = today.getDate() === i && today.getMonth() === month && today.getFullYear() === year;
+        grid.innerHTML += `<div class="calendar-day${isToday ? ' today' : ''}">${i}</div>`;
+      }
+    }
+
+    function changeMonth(delta) {
+      currentCalendarDate.setMonth(currentCalendarDate.getMonth() + delta);
+      renderCalendar();
+    }
+
+    // ====== QUICK SETTINGS ======
+    function toggleQuickSettings() {
+      document.getElementById('calendarPopup').classList.remove('open');
+      document.getElementById('quickSettings').classList.toggle('open');
+    }
+
+    function updateVolume(val) {
+      document.getElementById('volumeVal').textContent = val + '%';
+      const icon = document.getElementById('volumeIcon');
+      if (val == 0) icon.textContent = '🔇';
+      else if (val < 50) icon.textContent = '🔉';
+      else icon.textContent = '🔊';
+    }
+
+    document.getElementById('brightnessSlider')?.addEventListener('input', function() {
+      document.getElementById('brightnessVal').textContent = this.value + '%';
+    });
+
+    // ====== WIDGETS ======
+    function toggleWidgets() {
+      document.getElementById('widgetsPanel').classList.toggle('open');
+    }
+
+    // ====== WINDOW MANAGEMENT ======
+    let windowStates = {};
+    let openWindows = new Set();
+
+    function minimizeWindow(name) {
+      const win = document.getElementById(name + 'Window');
+      if (win) {
+        win.classList.add('minimized');
+        updateTaskbar();
+      }
+    }
+
+    function maximizeWindow(name) {
+      const win = document.getElementById(name + 'Window');
+      if (win) {
+        if (win.classList.contains('maximized')) {
+          win.classList.remove('maximized');
+          if (windowStates[name]) {
+            win.style.top = windowStates[name].top;
+            win.style.left = windowStates[name].left;
+            win.style.width = windowStates[name].width;
+            win.style.height = windowStates[name].height;
+          }
+        } else {
+          windowStates[name] = {
+            top: win.style.top,
+            left: win.style.left,
+            width: win.style.width,
+            height: win.style.height
+          };
+          win.classList.add('maximized');
+        }
+      }
+    }
+
+    // Override openWindow to track open windows
+    const baseOpenWindow = openWindow;
+    openWindow = function(name) {
+      const win = document.getElementById(name + 'Window');
+      if (win) {
+        win.classList.remove('minimized');
+        openWindows.add(name);
+        updateTaskbar();
+      }
+      baseOpenWindow(name);
+      if (name === 'paint') initPaint();
+      if (name === 'taskmanager') updateTaskManager();
+    };
+
+    // Override closeWindow
+    const baseCloseWindow = closeWindow;
+    closeWindow = function(name) {
+      openWindows.delete(name);
+      updateTaskbar();
+      baseCloseWindow(name);
+    };
+
+    function updateTaskbar() {
+      const apps = ['edge', 'explorer', 'terminal', 'notepad'];
+      apps.forEach(app => {
+        const btn = document.getElementById('taskbar-' + app);
+        if (btn) {
+          const win = document.getElementById(app + 'Window');
+          if (win && win.classList.contains('open') && !win.classList.contains('minimized')) {
+            btn.classList.add('running');
+          } else {
+            btn.classList.remove('running');
+          }
+        }
+      });
+    }
+
+    // ====== CALCULATOR ======
+    let calcValue = '0';
+    let calcOperator = null;
+    let calcPrevValue = null;
+    let calcNewNumber = true;
+
+    function calcInput(val) {
+      if (['+', '-', '*', '/'].includes(val)) {
+        calcOperator = val;
+        calcPrevValue = parseFloat(calcValue);
+        calcNewNumber = true;
+      } else if (val === '%') {
+        calcValue = (parseFloat(calcValue) / 100).toString();
+      } else if (val === '±') {
+        calcValue = (parseFloat(calcValue) * -1).toString();
+      } else {
+        if (calcNewNumber) {
+          calcValue = val;
+          calcNewNumber = false;
+        } else {
+          calcValue = calcValue === '0' ? val : calcValue + val;
+        }
+      }
+      document.getElementById('calcDisplay').textContent = calcValue;
+    }
+
+    function calcResult() {
+      if (calcOperator && calcPrevValue !== null) {
+        const current = parseFloat(calcValue);
+        let result;
+        switch (calcOperator) {
+          case '+': result = calcPrevValue + current; break;
+          case '-': result = calcPrevValue - current; break;
+          case '*': result = calcPrevValue * current; break;
+          case '/': result = calcPrevValue / current; break;
+        }
+        calcValue = result.toString();
+        document.getElementById('calcDisplay').textContent = calcValue;
+        calcOperator = null;
+        calcPrevValue = null;
+        calcNewNumber = true;
+      }
+    }
+
+    function clearCalc() {
+      calcValue = '0';
+      calcOperator = null;
+      calcPrevValue = null;
+      calcNewNumber = true;
+      document.getElementById('calcDisplay').textContent = '0';
+    }
+
+    // ====== TERMINAL ======
+    const terminalCommands = {
+      help: 'Available commands: help, dir, cls, echo, date, time, whoami, ver, color, exit',
+      dir: 'Directory of C:\\Users\\Shalom\n\n  Desktop\n  Documents\n  Downloads\n  Music\n  Pictures\n  Videos\n\n  6 Dir(s)',
+      cls: 'CLEAR',
+      whoami: 'Shalom',
+      ver: 'Microsoft Windows [Version 10.0.22631.2861]',
+      date: () => new Date().toLocaleDateString(),
+      time: () => new Date().toLocaleTimeString(),
+      exit: 'Closing terminal...'
+    };
+
+    function executeCommand() {
+      const input = document.getElementById('terminalInput');
+      const output = document.getElementById('terminalOutput');
+      const cmd = input.value.trim().toLowerCase();
+      
+      output.textContent += `C:\\Users\\Shalom>${input.value}\n`;
+      
+      if (cmd === 'cls') {
+        output.textContent = '';
+      } else if (cmd.startsWith('echo ')) {
+        output.textContent += cmd.substring(5) + '\n';
+      } else if (cmd.startsWith('color ')) {
+        const colors = { '0': '#000', '1': '#00f', '2': '#0f0', '3': '#0ff', '4': '#f00', 'a': '#0f0' };
+        output.style.color = colors[cmd.substring(6)] || '#fff';
+      } else if (terminalCommands[cmd]) {
+        const result = typeof terminalCommands[cmd] === 'function' ? terminalCommands[cmd]() : terminalCommands[cmd];
+        output.textContent += result + '\n';
+        if (cmd === 'exit') setTimeout(() => closeWindow('terminal'), 500);
+      } else if (cmd) {
+        output.textContent += `'${cmd}' is not recognized as an internal or external command.\n`;
+      }
+      
+      output.textContent += '\n';
+      input.value = '';
+      output.scrollTop = output.scrollHeight;
+    }
+
+    // ====== TASK MANAGER ======
+    function updateTaskManager() {
+      document.getElementById('cpuUsage').textContent = Math.floor(Math.random() * 40 + 10) + '%';
+      document.getElementById('memUsage').textContent = Math.floor(Math.random() * 30 + 50) + '%';
+      document.getElementById('diskUsage').textContent = Math.floor(Math.random() * 20 + 5) + '%';
+
+      const tasks = [
+        { name: 'System', icon: '⚙️', cpu: '0.1%', mem: '0.2 MB' },
+        { name: 'Windows Explorer', icon: '📁', cpu: '0.5%', mem: '45.2 MB' },
+        { name: 'Microsoft Edge', icon: '🌐', cpu: '2.3%', mem: '312.1 MB' },
+        { name: 'Desktop Window Manager', icon: '🖥️', cpu: '1.2%', mem: '89.5 MB' },
+        { name: 'Windows Security', icon: '🛡️', cpu: '0.0%', mem: '12.4 MB' }
+      ];
+
+      const list = document.getElementById('taskList');
+      list.innerHTML = tasks.map(t => `
+        <div class="task-item">
+          <div class="task-info">
+            <span>${t.icon}</span>
+            <span>${t.name}</span>
+          </div>
+          <div style="display: flex; gap: 20px; align-items: center;">
+            <span style="color: #888; font-size: 12px;">${t.cpu}</span>
+            <span style="color: #888; font-size: 12px;">${t.mem}</span>
+            <button class="task-end">End task</button>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    // ====== PAINT ======
+    let paintColor = '#000';
+    let paintSize = 2;
+    let painting = false;
+    let paintCtx = null;
+
+    function initPaint() {
+      const canvas = document.getElementById('paintCanvas');
+      if (!canvas) return;
+      const rect = canvas.parentElement.getBoundingClientRect();
+      canvas.width = rect.width;
+      canvas.height = rect.height - 50;
+      paintCtx = canvas.getContext('2d');
+      paintCtx.fillStyle = '#fff';
+      paintCtx.fillRect(0, 0, canvas.width, canvas.height);
+
+      canvas.onmousedown = (e) => { painting = true; paintCtx.beginPath(); };
+      canvas.onmouseup = () => painting = false;
+      canvas.onmouseout = () => painting = false;
+      canvas.onmousemove = (e) => {
+        if (!painting) return;
+        const rect = canvas.getBoundingClientRect();
+        paintCtx.lineWidth = paintSize;
+        paintCtx.lineCap = 'round';
+        paintCtx.strokeStyle = paintColor;
+        paintCtx.lineTo(e.clientX - rect.left, e.clientY - rect.top);
+        paintCtx.stroke();
+        paintCtx.beginPath();
+        paintCtx.moveTo(e.clientX - rect.left, e.clientY - rect.top);
+      };
+    }
+
+    function setPaintColor(color, el) {
+      paintColor = color;
+      document.querySelectorAll('.paint-color').forEach(c => c.classList.remove('active'));
+      el.classList.add('active');
+    }
+
+    function setPaintSize(size, el) {
+      paintSize = size;
+      document.querySelectorAll('.paint-size').forEach(s => s.classList.remove('active'));
+      el.classList.add('active');
+    }
+
+    function clearCanvas() {
+      if (paintCtx) {
+        const canvas = document.getElementById('paintCanvas');
+        paintCtx.fillStyle = '#fff';
+        paintCtx.fillRect(0, 0, canvas.width, canvas.height);
+      }
+    }
+
+    // ====== SEARCH ======
+    function filterApps(query) {
+      const apps = document.querySelectorAll('#pinnedApps .app-item');
+      apps.forEach(app => {
+        const name = app.dataset.name || '';
+        const text = app.textContent.toLowerCase();
+        app.style.display = (text.includes(query.toLowerCase()) || name.includes(query.toLowerCase())) ? '' : 'none';
+      });
+    }
+
+    // ====== KEYBOARD SHORTCUTS ======
+    let altTabIndex = 0;
+    let altTabWindows = [];
+
+    document.addEventListener('keydown', (e) => {
+      // Win key
+      if (e.key === 'Meta' || (e.key === 'Control' && e.altKey)) {
+        toggleStartMenu();
+      }
+      // Alt+Tab
+      if (e.altKey && e.key === 'Tab') {
+        e.preventDefault();
+        showAltTab();
+      }
+      // Alt+F4
+      if (e.altKey && e.key === 'F4') {
+        e.preventDefault();
+        const topWindow = getTopWindow();
+        if (topWindow) closeWindow(topWindow.replace('Window', ''));
+      }
+      // Win+L
+      if (e.metaKey && e.key === 'l') {
+        e.preventDefault();
+        lockScreen();
+      }
+      // Escape
+      if (e.key === 'Escape') {
+        document.getElementById('startMenu').classList.remove('open');
+        document.getElementById('quickSettings').classList.remove('open');
+        document.getElementById('calendarPopup').classList.remove('open');
+        document.getElementById('altTabSwitcher').classList.remove('open');
+        document.getElementById('widgetsPanel').classList.remove('open');
+      }
+    });
+
+    function getTopWindow() {
+      let topZ = 0, topWin = null;
+      document.querySelectorAll('.window.open').forEach(w => {
+        const z = parseInt(w.style.zIndex) || 0;
+        if (z >= topZ) { topZ = z; topWin = w.id; }
+      });
+      return topWin;
+    }
+
+    function showAltTab() {
+      altTabWindows = Array.from(document.querySelectorAll('.window.open')).map(w => ({
+        id: w.id,
+        title: w.querySelector('.window-title')?.textContent || 'Window',
+        icon: w.querySelector('.window-title span')?.textContent || '📄'
+      }));
+      
+      if (altTabWindows.length === 0) return;
+      
+      altTabIndex = (altTabIndex + 1) % altTabWindows.length;
+      const switcher = document.getElementById('altTabSwitcher');
+      switcher.innerHTML = altTabWindows.map((w, i) => `
+        <div class="alt-tab-item${i === altTabIndex ? ' selected' : ''}" onclick="selectAltTab(${i})">
+          <span>${w.icon}</span>
+          <small>${w.title}</small>
+        </div>
+      `).join('');
+      switcher.classList.add('open');
+      
+      setTimeout(() => switcher.classList.remove('open'), 2000);
+    }
+
+    function selectAltTab(index) {
+      const win = document.getElementById(altTabWindows[index].id);
+      if (win) {
+        win.classList.remove('minimized');
+        bringToFront(win);
+      }
+      document.getElementById('altTabSwitcher').classList.remove('open');
+    }
+
+    // ====== LOCK SCREEN ======
+    function lockScreen() {
+      document.getElementById('startMenu').classList.remove('open');
+      const overlay = document.getElementById('lockOverlay');
+      overlay.classList.add('show');
+      updateLockOverlayTime();
+      
+      overlay.onclick = () => {
+        overlay.classList.remove('show');
+      };
+    }
+
+    function updateLockOverlayTime() {
+      const now = new Date();
+      const time = document.getElementById('lockOverlayTime');
+      const date = document.getElementById('lockOverlayDate');
+      if (time) time.textContent = now.toLocaleTimeString('he-IL', { hour: '2-digit', minute: '2-digit' });
+      if (date) date.textContent = now.toLocaleDateString('he-IL', { weekday: 'long', day: 'numeric', month: 'long' });
+    }
+
+    // ====== BSOD EASTER EGG ======
+    function triggerBSOD() {
+      document.getElementById('startMenu').classList.remove('open');
+      document.getElementById('bsodScreen').classList.add('show');
+      
+      let progress = 0;
+      const interval = setInterval(() => {
+        progress += Math.random() * 15;
+        if (progress >= 100) {
+          progress = 100;
+          clearInterval(interval);
+          setTimeout(() => {
+            document.getElementById('bsodScreen').classList.remove('show');
+            shutdown();
+          }, 1500);
+        }
+        document.querySelector('.bsod-text').textContent = `We're just collecting some error info, and then we'll restart for you.\n\n${Math.floor(progress)}% complete`;
+      }, 500);
+    }
+
+    // ====== FILE OPERATIONS ======
+    function createNewFolder() {
+      const name = prompt('שם התיקייה החדשה:');
+      if (name && fileSystem[currentPath]) {
+        fileSystem[currentPath].children[name] = { type: 'folder', icon: '📁' };
+        fileSystem[currentPath + '/' + name] = { type: 'folder', icon: '📁', children: {} };
+        renderExplorer(currentPath);
+      }
+    }
+
+    function createNewFile() {
+      const name = prompt('שם הקובץ החדש:');
+      if (name && fileSystem[currentPath]) {
+        fileSystem[currentPath].children[name] = { type: 'file', icon: '📄' };
+        renderExplorer(currentPath);
+      }
+    }
+
+    // Close popups on outside click
+    document.addEventListener('click', (e) => {
+      if (!e.target.closest('.calendar-popup') && !e.target.closest('.clock')) {
+        document.getElementById('calendarPopup').classList.remove('open');
+      }
+      if (!e.target.closest('.quick-settings') && !e.target.closest('.system-tray')) {
+        document.getElementById('quickSettings').classList.remove('open');
+      }
+      if (!e.target.closest('.widgets-panel') && !e.target.closest('.taskbar-btn')) {
+        document.getElementById('widgetsPanel').classList.remove('open');
+      }
+    });
 
     // Start Boot
     setTimeout(typeBios, 500);
